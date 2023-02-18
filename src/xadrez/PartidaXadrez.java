@@ -1,5 +1,7 @@
 package xadrez;
 
+import camadaTabuleiro.Peca;
+import camadaTabuleiro.Posicao;
 import camadaTabuleiro.Tabuleiro;
 import xadrez.pecas.Rei;
 import xadrez.pecas.Torre;
@@ -23,23 +25,44 @@ public class PartidaXadrez {
 		return matriz;
 	}
 	
-	private void posicaoXadrez(char coluna, int linha, PecaXadrez peca) {
+	public PecaXadrez moverPeca(PosicaoXadrez origemPosicao, PosicaoXadrez destinoPosicao) {
+		Posicao origem = origemPosicao.toPosicao();
+		Posicao destino = destinoPosicao.toPosicao();
+		posicaoOrigemValida(origem);
+		Peca pecaCapturada = movimento(origem, destino);
+		return (PecaXadrez) pecaCapturada;
+	}
+	
+	private Peca movimento(Posicao origem, Posicao destino) {
+		Peca p = tabuleiro.removePeca(origem);
+		Peca pecaCapturada = tabuleiro.removePeca(destino);
+		tabuleiro.posicaoPeca(p, destino);
+		return pecaCapturada;
+	}
+	
+	private void posicaoOrigemValida(Posicao posicao) {
+		if(!tabuleiro.temUmaPeca(posicao)) {
+			throw new XadrezException("essa posicao nao tem peca!");
+		}
+	}
+	
+	private void novaPecaXadrez(char coluna, int linha, PecaXadrez peca) {
 		tabuleiro.posicaoPeca(peca, new PosicaoXadrez(coluna, linha).toPosicao());
 	}
 	
 	private void partidaInicial() {
-		posicaoXadrez('c', 1, new Torre(tabuleiro, Cor.branco));
-		posicaoXadrez('c', 2, new Torre(tabuleiro, Cor.branco));
-		posicaoXadrez('d', 2, new Torre(tabuleiro, Cor.branco));
-		posicaoXadrez('e', 2, new Torre(tabuleiro, Cor.branco));
-		posicaoXadrez('e', 1, new Torre(tabuleiro, Cor.branco));
-		posicaoXadrez('d', 1, new Rei(tabuleiro, Cor.branco));
+		novaPecaXadrez('c', 1, new Torre(tabuleiro, Cor.branco));
+		novaPecaXadrez('c', 2, new Torre(tabuleiro, Cor.branco));
+		novaPecaXadrez('d', 2, new Torre(tabuleiro, Cor.branco));
+		novaPecaXadrez('e', 2, new Torre(tabuleiro, Cor.branco));
+		novaPecaXadrez('e', 1, new Torre(tabuleiro, Cor.branco));
+		novaPecaXadrez('d', 1, new Rei(tabuleiro, Cor.branco));
 
-		posicaoXadrez('c', 7, new Torre(tabuleiro, Cor.preto));
-		posicaoXadrez('c', 8, new Torre(tabuleiro, Cor.preto));
-		posicaoXadrez('d', 7, new Torre(tabuleiro, Cor.preto));
-		posicaoXadrez('e', 7, new Torre(tabuleiro, Cor.preto));
-		posicaoXadrez('e', 8, new Torre(tabuleiro, Cor.preto));
-		posicaoXadrez('d', 8, new Rei(tabuleiro, Cor.preto));
+		novaPecaXadrez('c', 7, new Torre(tabuleiro, Cor.preto));
+		novaPecaXadrez('c', 8, new Torre(tabuleiro, Cor.preto));
+		novaPecaXadrez('d', 7, new Torre(tabuleiro, Cor.preto));
+		novaPecaXadrez('e', 7, new Torre(tabuleiro, Cor.preto));
+		novaPecaXadrez('e', 8, new Torre(tabuleiro, Cor.preto));
+		novaPecaXadrez('d', 8, new Rei(tabuleiro, Cor.preto));
 	}
 }

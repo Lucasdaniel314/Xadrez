@@ -1,6 +1,13 @@
 package camadaTabuleiro;
 
 public class Tabuleiro {
+	
+	/**
+	 * esse jogo foi o meu primeiro projeto grande e treinava todos os conhecimentos que eu aprendi
+	 * como polimorfismo, matriz, orientação a objetos e exeções.
+	 * 
+	 * @author Lucas Daniel
+	 */
 
 	private int linhas;
 	private int colunas;
@@ -39,10 +46,23 @@ public class Tabuleiro {
 	
 	public void posicaoPeca(Peca peca, Posicao posicao) {
 		if (temUmaPeca(posicao)) {
-			throw new TabuleiroException("já tem uma peça na posição " + posicao);
+			throw new TabuleiroException("ja tem uma peça na posição " + posicao);
 		}
 		pecas[posicao.getLinha()][posicao.getColuna()] = peca;
 		peca.posicao = posicao;
+	}
+	
+	public Peca removePeca(Posicao posicao) {
+		if(!posicaoExistente(posicao)) {
+			throw new TabuleiroException("essa posicao nao existe!");
+		}
+		if(peca(posicao) == null) {
+			return null;
+		}
+		Peca aux = peca(posicao);
+		aux.posicao = null;
+		pecas[posicao.getLinha()][posicao.getColuna()] = null;
+		return aux;
 	}
 	
 	private boolean posicaoExistente(int linha, int coluna) {
@@ -55,7 +75,7 @@ public class Tabuleiro {
 	
 	public boolean temUmaPeca(Posicao posicao) {
 		if (!posicaoExistente(posicao)) {
-			throw new TabuleiroException("essa posição não existe!");
+			throw new TabuleiroException("essa posicao nao existe!");
 		}
 		return peca(posicao) != null;
 	}
