@@ -15,4 +15,10 @@ public class Rei extends PecaXadrez {
 		return "K";
 		//"K" de King, Rei em inglês
 	}
+
+	@Override
+	public boolean[][] movimentosPossiveis() {
+		boolean[][] matriz = new boolean[getTabuleiro().getLinhas()][getTabuleiro().getColunas()];
+		return matriz;
+	}
 }

@@ -21,9 +21,9 @@ public class Programa {
 				System.out.println();
 				System.out.print("origem: ");
 				PosicaoXadrez origem = UI.lerPosicao(sc);
-				
 				System.out.print("destino: ");
 				PosicaoXadrez destino = UI.lerPosicao(sc);
+				
 				PecaXadrez pecaCapturada = partidaXadrez.moverPeca(origem, destino);
 			} catch (XadrezException e) {
 				System.out.println("erro: " + e.getMessage());

@@ -15,4 +15,10 @@ public class Torre extends PecaXadrez {
 		return "R";
 		//"R" de Rook, torre em inglês
 	}
+
+	@Override
+	public boolean[][] movimentosPossiveis() {
+		boolean[][] matriz = new boolean[getTabuleiro().getLinhas()][getTabuleiro().getColunas()];
+		return matriz;
+	}
 }
