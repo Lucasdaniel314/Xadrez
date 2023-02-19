@@ -16,11 +16,13 @@ public class Programa {
 		
 		while(true) {
 			try {
-				UI.limpaTela();
+				UI.clearScreen();
 				UI.imprimeTabuleiro(partidaXadrez.getPecas());
 				System.out.println();
+				
 				System.out.print("origem: ");
 				PosicaoXadrez origem = UI.lerPosicao(sc);
+				
 				System.out.print("destino: ");
 				PosicaoXadrez destino = UI.lerPosicao(sc);
 				
